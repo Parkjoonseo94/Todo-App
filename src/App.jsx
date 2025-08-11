@@ -38,7 +38,7 @@ function TodoInput({ todoList, setTodoList }) {
         value={inputValue}
         onChange={(event) => setInputValue(event.target.value)}
       />
-      <button
+      <button className="btn add"
         onClick={() => {
           const newTodo = { id: Number(new Date()), content: inputValue };
           const newTodoList = [...todoList, newTodo];
