@@ -51,32 +51,41 @@ function TodoList({ todoList, setTodoList }) {
 }
 
 function Todo({ todo, setTodoList }) {
-  const [inputValue, setInputValue] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [inputValue, setInputValue] = useState(todo.content);
+
+  const startEdit = () => {
+    setInputValue(todo.content); // 최신 내용으로 초기화
+    setIsEditing(true);
+  };
+
+  const handleSave = () => {
+    if (!inputValue.trim()) return;
+    setTodoList(prev =>
+      prev.map(el => (el.id === todo.id ? { ...el, content: inputValue.trim() } : el))
+    );
+    setIsEditing(false);
+  };
+
   return (
-    <li>
-      {todo.content}
-      <input
-        value={inputValue}
-        onChange={(event) => setInputValue(event.target.value)}
-      />
-      <button
-        onClick={() => {
-          setTodoList((prev) =>
-            prev.map((el) =>
-              el.id === todo.id ? { ...el, content: inputValue } : el
-            )
-          );
-        }}
-      >
-        수정
-      </button>
-      <button
-        onClick={() => {
-          setTodoList((prev) => {
-            return prev.filter((el) => el.id !== todo.id);
-          });
-        }}
-      >
+    <li className="todo-item">
+      {isEditing ? (
+        <>
+          <input
+            className="edit-input"
+            value={inputValue}
+            onChange={(e) => setInputValue(e.target.value)}
+          />
+          <button className="btn save" onClick={handleSave}>저장</button>
+          <button className="btn cancel" onClick={() => setIsEditing(false)}>취소</button>
+        </>
+      ) : (
+        <>
+          <span className="todo-content">{todo.content}</span>
+          <button className="btn edit" onClick={startEdit}>수정</button>
+        </>
+      )}
+      <button className="btn delete" onClick={() => setTodoList(prev => prev.filter(el => el.id !== todo.id))}>
         삭제
       </button>
     </li>
