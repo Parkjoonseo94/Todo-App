@@ -87,3 +87,29 @@
 .btn.save  { background:#ff9800; color:#fff; }
 .btn.delete{ background:#e53935; color:#fff; }
 .btn.cancel{ background:#9e9e9e; color:#fff; }
+
+body {
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background-color: skyblue;
+  margin: 0;
+}
+
+.header { text-align:center; margin-bottom: 18px; }
+.header h1 { margin:0; font-size: 26px; }
+.subtitle { margin:6px 0 0; color:#666; font-size:14px; }
+
+.todo-input input,
+.edit-input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid #e0e0e0;
+  outline: none;
+  transition: box-shadow 0.12s ease;
+}
+.todo-input input:focus,
+.edit-input:focus { box-shadow: 0 4px 12px rgba(25,118,210,0.08); }
+
+@media (max-width: 480px) {
+  .app-container { padding: 12px; }
+  .todo-item { flex-direction: column; align-items: stretch; gap: 8px; }
+}
