@@ -1,6 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 
+function TodoHeader() {
+  return (
+    <header className="header">
+      <h1>Todo App</h1>
+      <p className="subtitle">할 일을 추가·수정·삭제하고 완료를 체크하세요</p>
+    </header>
+  );
+}
+
 function App() {
   const [todoList, setTodoList] = useState([
     { id: 0, content: "123", completed: false },
@@ -9,11 +18,12 @@ function App() {
   ]);
 
   return (
-    <>
+    <div className="app-container">
+      <TodoHeader />
       <TodoList todoList={todoList} setTodoList={setTodoList} />
       <hr />
       <TodoInput todoList={todoList} setTodoList={setTodoList} />
-    </>
+    </div>
   );
 }
 
